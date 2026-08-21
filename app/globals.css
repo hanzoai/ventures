@@ -100,10 +100,18 @@ nav .in {
 }
 
 /* The nav is one row of mono set in wide tracking, so it runs out of phone
-   before anything else does. Tighten it rather than drop a destination. */
+   before anything else does — four destinations plus the wordmark measured
+   ~228px of links into ~195px of room at 390, and "SIGN IN" went off the
+   right edge.
+   It WRAPS rather than dropping a destination: the brand keeps row one and
+   the links take row two, all four still reachable. Hiding one would have
+   been the easy fix and would have made a link that exists on a desktop
+   vanish on a phone. The `no horizontal overflow` gate measures this. */
 @media (max-width: 34rem) {
   nav .in {
+    flex-wrap: wrap;
     padding: 1rem 1.1rem;
+    gap: 0.6rem;
   }
 
   .brand {
@@ -112,7 +120,8 @@ nav .in {
   }
 
   .navlinks {
-    gap: 0.7rem;
+    width: 100%;
+    gap: 0.9rem;
   }
 
   .navlink {

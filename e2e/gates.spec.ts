@@ -103,6 +103,30 @@ test('buttons are pills and cards are 24px', async ({ page }) => {
   }
 })
 
+// 390 is the iPhone measure and the narrowest thing anyone actually holds; the
+// nav is a row of wide-tracked mono and is always what overflows first. This
+// caught "SIGN IN" running off the right edge on the first published build.
+for (const width of [320, 390, 768, 1280]) {
+  test(`nothing overflows sideways at ${width}`, async ({ browser }) => {
+    const ctx = await browser.newContext({ viewport: { width, height: 900 } })
+    const p = await ctx.newPage()
+    await p.goto('/')
+    const over = await p.evaluate((w) => {
+      const bad: string[] = []
+      for (const el of Array.from(document.querySelectorAll('*'))) {
+        const r = el.getBoundingClientRect()
+        if (r.width > 0 && Math.round(r.right) > w + 1) {
+          bad.push(`${el.tagName.toLowerCase()}.${(el.className || '').toString().split(' ')[0]} right=${Math.round(r.right)}`)
+        }
+      }
+      return { bad: Array.from(new Set(bad)).slice(0, 8), scroll: document.documentElement.scrollWidth }
+    }, width)
+    expect(over.scroll, 'the document must not scroll sideways').toBeLessThanOrEqual(width)
+    expect(over.bad, `these run past the right edge:\n${over.bad.join('\n')}`).toEqual([])
+    await ctx.close()
+  })
+}
+
 test('the canonical Hanzo mark renders', async ({ page }) => {
   // From @hanzo/logo, never hand-drawn. It is an inline SVG inside the brand
   // link, so a broken import shows up here as zero nodes rather than as a
