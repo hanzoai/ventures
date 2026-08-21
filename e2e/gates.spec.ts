@@ -168,6 +168,40 @@ test('no number on the page that we cannot source', async ({ page }) => {
   expect(Array.from(new Set(money))).toEqual(['$150,000'])
 })
 
+test('one collector, and it is ours', async ({ page }) => {
+  // The page may talk to api.hanzo.ai and to nowhere else. This is what stops a
+  // vendor tag, a pixel or a second analytics script arriving later and
+  // splitting the numbers across two systems that never agree.
+  //
+  // It measures the EXPORT, served locally, so it sees only what this repo
+  // ships. Cloudflare injects its own beacon at the edge on the live host; the
+  // CSP in universe refuses that one, and refusing it is the same rule enforced
+  // one layer out.
+  const offsite: string[] = []
+  page.on('request', (r) => {
+    const u = new URL(r.url())
+    if (u.hostname !== '127.0.0.1' && u.hostname !== 'localhost' && u.hostname !== 'api.hanzo.ai') {
+      offsite.push(`${u.hostname}${u.pathname}`)
+    }
+  })
+  await page.goto('/')
+  await page.waitForLoadState('networkidle')
+  expect(Array.from(new Set(offsite)), 'the page must call no collector but ours').toEqual([])
+})
+
+test('the ingest key, if declared, is a real publishable key', async () => {
+  // `pk-` is the only prefix cloud reads as a publishable key. A value of any
+  // other shape is not a key that fails loudly — it is a bundle whose every
+  // anonymous event is refused 401, which reads as "no traffic" rather than as
+  // a broken deploy. Empty is the honest absent state and passes; malformed
+  // does not.
+  const src = readFileSync(join(__dirname, '../app/providers.tsx'), 'utf8')
+  const declared = src.match(/NEXT_PUBLIC_PUBLISHABLE_KEY \|\| '([^']*)'/)
+  expect(declared, 'providers.tsx must keep the declared-key shape').not.toBeNull()
+  const key = declared![1]
+  if (key !== '') expect(key, 'a declared key must carry the pk- prefix').toMatch(/^pk-[A-Za-z0-9_-]{20,}$/)
+})
+
 test('every address this page sends a reader to answers', async ({ page, request }) => {
   const hrefs = await page.locator('a[href^="https://"]').evaluateAll((els) =>
     Array.from(new Set(els.map((e) => (e as HTMLAnchorElement).href))),
