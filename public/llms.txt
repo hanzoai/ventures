@@ -1,0 +1,67 @@
+# Hanzo Ventures
+
+> We fund startups building AI infrastructure, decentralized systems and the
+> tooling underneath both. We are operators before we are investors: Hanzo AI,
+> Lux and Zoo are our own companies. Hanzo AI is Techstars '17.
+
+Contact: ventures@hanzo.ai
+Program application: https://hanzo.ai/startups
+
+## What we fund
+
+- AI infrastructure — inference, agents, retrieval, evaluation. The plumbing
+  under the models rather than another wrapper on top of them.
+- Decentralized systems — chains, identity, post-quantum cryptography,
+  settlement.
+- Developer tools — things engineers adopt without a procurement cycle.
+- Open weights and open source — businesses whose core is readable.
+
+## The Hanzo Startup Program
+
+Run by Hanzo AI. Open whether or not we invest; the credits are not a term
+sheet and carry no equity.
+
+- Start free. Pay for what you use — no subscription, no minimum.
+- Bring your own compute. We meter the platform, not your hardware.
+- Up to $150,000 in credits for venture-backed teams. Application required;
+  tier-one backing is a condition of the credits tier.
+- Techstars founders: name your batch in the application and we match perks.
+
+Apply: https://hanzo.ai/startups
+
+## Portfolio — built and operated by us
+
+Companies, networks and model families we founded and still run.
+
+- Hanzo AI (Hanzo AI Inc.): https://hanzo.ai — Enterprise AI infrastructure and
+  frontier models.
+- Lux Network (Lux Industries Inc.): https://lux.network — High-performance,
+  post-quantum blockchain infrastructure.
+- Zoo (Zoo Labs Foundation): https://zoo.ngo — Open, decentralized AI and
+  science research network.
+- Pars Network (Parsis Foundation): https://pars.network — A sovereign,
+  verifiable identity layer for the Pars community.
+- Zen: https://zenlm.org — Our open-weight model family.
+- Lux Fund: https://lux.fund — Digital asset management and a fund of funds.
+- Hanzo Agency: https://hanzo.agency — Design, content and marketing.
+- Sensei Group: https://sensei.group — Fractional CXOs and operators.
+
+## Companies we have built for
+
+Operating work for companies we do NOT own. These are clients, not
+investments. Each link is our own written account of the work.
+
+- Unikrn: https://blog.hanzo.ai/blog/2019-09-15-case-study-unikoin-gold/
+- Casper Labs: https://blog.hanzo.ai/blog/2020-11-20-case-study-casper-blockchain/
+- Damon Motorcycles: https://blog.hanzo.ai/blog/2021-06-10-case-study-damon-motorcycles/
+- Bellabeat: https://blog.hanzo.ai/blog/2022-04-15-case-study-bellabeat/
+- Personas Social: https://blog.hanzo.ai/blog/2025-01-10-case-study-keek-social/
+
+## What this page does not claim
+
+No fund size, no assets under management, no exit figures, no headcount and no
+valuations appear anywhere on this site. No verifiable record of any of them
+exists, so none is published. The one figure quoted, $150,000, is the ceiling
+of the Hanzo Startup Program's credits tier as published at hanzo.ai/startups.
+
+Nothing here is an offer to sell or a solicitation to buy any security.

@@ -1,0 +1,86 @@
+name: deploy
+
+# A SITE IS NOT AN APP.
+#
+# hanzo.ventures is a Next.js `output: export` — a handful of HTML files that
+# never execute. It gets no container image, no App CR, no replicas and no
+# operator reconcile. It goes to the Sites plane, which exists for this shape:
+#
+#   pnpm build -> out/
+#     -> POST /v1/projects/hanzo-ventures/deployments   (202, an upload grant)
+#     -> POST the objects straight to S3                (the bytes skip the API)
+#     -> POST .../deployments/<id>/complete             (live; prunes what went)
+#
+# The mechanics are NOT transcribed here; they are `bin/site` in hanzoai/ci,
+# because hanzo.ai, works, hips and computer make the identical three calls and
+# a contract copied per repo is a contract that drifts. The action also
+# self-provisions the project idempotently, so committing this file is enough
+# to stand the site up the first time.
+#
+# ONE credential, and it is not a bucket key. The 202 carries a prefix-scoped,
+# 30-minute presigned POST grant. Do NOT add SITES_S3_* — that is the standing
+# shared-bucket credential the grant replaced, and it could overwrite every
+# other org's site.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'components/**'
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'next.config.mjs'
+      - '.hanzo/workflows/deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  # Never cancel a publish in flight: a half-uploaded prefix is a broken site.
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  site:
+    runs-on: hanzo-build-linux-amd64
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      # No `version:` — package.json's `packageManager` is the single source,
+      # and naming it here too makes action-setup fail outright on a mismatch
+      # rather than picking one.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build the static export
+        run: |
+          set -euo pipefail
+          pnpm build
+          test -d out || { echo "::error::pnpm build produced no out/"; exit 1; }
+          echo "exported $(find out -type f | wc -l) files"
+
+      # The gates run in the job that PUBLISHES. Workflows sharing a trigger do
+      # not order themselves, so a red gate in cicd.yml cannot stop a publish
+      # here — the only placement that makes "nothing publishes ungated" true.
+      - name: Install the browser the gates measure in
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Gates
+        run: pnpm gates
+
+      - name: Publish to the Sites plane
+        uses: https://git.hanzo.ai/hanzoai/ci/.github/actions/site@v1
+        with:
+          slug: hanzo-ventures
+          dir: out
+        env:
+          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
+          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}

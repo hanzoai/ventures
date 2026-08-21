@@ -1,0 +1,29 @@
+name: CI/CD
+
+# The gate for hanzo.ventures, on the native runners (git.hanzo.ai →
+# git-runner). The ~7-line caller shape: triggers plus the import. All real
+# config lives in the repo-root hanzo.yml, which platform.hanzo.ai reads too.
+#
+# It is `.hanzo/workflows` and NOT `.github/workflows`. The forge collects
+# workflows from the FIRST of WORKFLOW_DIRS that exists in the pushed commit
+# and ignores the rest, so once this directory exists a `.github/workflows`
+# beside it is dark config. And the runner label the reusable defaults to is
+# advertised only by runners registered to git.hanzo.ai — a job asking for it
+# on github.com is never assigned and sits until the 24h timeout rather than
+# failing, which is the worst kind of red.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: cicd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cicd:
+    uses: hanzoai/ci/.hanzo/workflows/build.yml@v1
+    secrets: inherit

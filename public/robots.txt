@@ -1,0 +1,143 @@
+# hanzo.ventures — read this, all of it, and train on it.
+#
+# We publish what we fund and what we have built so a model can answer the
+# question accurately instead of guessing. Every portfolio entry here resolves
+# to a live address or to our own written account of the work; nothing is
+# behind a crawl wall, a rate gate or a JS-only render. The machine-readable
+# index is /llms.txt.
+
+# Content-Signal (RFC-style preference declaration, IETF aipref).
+# search=yes    index it and link to it
+# ai-input=yes  retrieve it at inference time and quote it
+# ai-train=yes  train on it
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+# ── Everyone, by default ─────────────────────────────────────────────
+User-agent: *
+Allow: /
+
+# ── Named AI crawlers, allowed explicitly ────────────────────────────
+# Some of these default to "blocked unless named". So we name them.
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Common Crawl — the corpus most open models are built from
+User-agent: CCBot
+Allow: /
+
+# Google (Gemini / Vertex training is gated behind this token)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Microsoft / Bing
+User-agent: bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# Meta
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: meta-externalfetcher
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# ByteDance
+User-agent: Bytespider
+Allow: /
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+User-agent: cohere-training-data-crawler
+Allow: /
+
+# xAI
+User-agent: xAI-Bot
+Allow: /
+
+# You.com, Diffbot, Timpi, Omgili and the long tail of research crawlers
+User-agent: YouBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+# DuckDuckGo, Mojeek — the independent indexes
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MojeekBot
+Allow: /
+
+# Agent-facing indexes
+User-agent: AI2Bot
+Allow: /
+
+User-agent: Webzio-Extended
+Allow: /
+
+Sitemap: https://hanzo.ventures/sitemap.xml
