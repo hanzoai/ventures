@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "hanzo.ventures — we fund startups building on the stack we run our own company on.",
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@11.24.0",
   "engines": {
     "node": ">=22.18"
   },
@@ -15,11 +15,11 @@
     "gates": "playwright test"
   },
   "dependencies": {
-    "@hanzo/appearance": "^0.2.1",
-    "@hanzo/design": "^0.5.17",
-    "@hanzo/event": "^0.3.34",
-    "@hanzo/iam": "^0.21.16",
-    "@hanzo/logo": "^1.0.20",
+    "@hanzo/appearance": "0.2.2",
+    "@hanzo/design": "0.5.24",
+    "@hanzo/event": "0.3.37",
+    "@hanzo/iam": "0.21.17",
+    "@hanzo/logo": "1.0.26",
     "next": "16.2.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
