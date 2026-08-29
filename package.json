@@ -15,20 +15,20 @@
     "gates": "playwright test"
   },
   "dependencies": {
-    "@hanzo/appearance": "0.2.2",
-    "@hanzo/design": "0.5.24",
-    "@hanzo/event": "0.3.37",
-    "@hanzo/iam": "0.21.17",
-    "@hanzo/logo": "1.0.26",
-    "next": "16.3.3",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "@hanzo/appearance": "catalog:",
+    "@hanzo/design": "catalog:",
+    "@hanzo/event": "catalog:",
+    "@hanzo/iam": "catalog:",
+    "@hanzo/logo": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@playwright/test": "^1.62.1",
-    "@types/node": "26.4.0",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.5",
-    "typescript": "7.0.2"
+    "@playwright/test": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:"
   }
 }
