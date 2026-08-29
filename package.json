@@ -2,7 +2,7 @@
   "name": "@hanzo/ventures",
   "version": "0.1.0",
   "private": true,
-  "description": "hanzo.ventures — we fund startups building on the stack we run our own company on.",
+  "description": "hanzo.ventures \u2014 we fund startups building on the stack we run our own company on.",
   "packageManager": "pnpm@11.24.0",
   "engines": {
     "node": ">=22.18"
@@ -20,15 +20,15 @@
     "@hanzo/event": "0.3.37",
     "@hanzo/iam": "0.21.17",
     "@hanzo/logo": "1.0.26",
-    "next": "16.2.12",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "next": "16.3.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@playwright/test": "^1.49.0",
-    "@types/node": "^22.10.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "typescript": "^5.7.2"
+    "@playwright/test": "^1.62.1",
+    "@types/node": "26.4.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "typescript": "7.0.2"
   }
 }
