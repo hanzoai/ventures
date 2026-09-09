@@ -33,7 +33,7 @@ on:
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'next.config.mjs'
-      - '.hanzo/workflows/deploy.yml'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 concurrency:
